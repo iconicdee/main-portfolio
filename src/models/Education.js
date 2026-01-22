@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const EducationSchema = new mongoose.Schema(
   {
@@ -10,6 +10,6 @@ const EducationSchema = new mongoose.Schema(
 );
 
 const Education =
-  mongoose.models.Education || mongoose.models("Education", EducationSchema);
+  mongoose.models.Education || mongoose.model("Education", EducationSchema);
 
 export default Education;

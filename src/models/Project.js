@@ -10,7 +10,8 @@ const ProjectSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Fix: use correct model name and mongoose.model (not mongoose.models("Project", ...))
 const Project =
-  mongoose.models.Home || mongoose.models("Project", ProjectSchema);
+  mongoose.models.Project || mongoose.model("Project", ProjectSchema);
 
 export default Project;

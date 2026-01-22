@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const AboutSchema = new mongoose.Schema(
   {
-    aboutme: String,
-    noofexperience: String,
     yearofexperience: String,
     noofclient: String,
+    noofproject: String,
+    aboutme: String,
     skills: String,
   },
   { timestamps: true }
 );
 
-const About = mongoose.models.About || mongoose.models("About", AboutSchema);
+const About = mongoose.models.About || mongoose.model("About", AboutSchema);
 
 export default About;
