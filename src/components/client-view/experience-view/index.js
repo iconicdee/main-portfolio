@@ -14,7 +14,6 @@ export default function ClientExperienceView({
   educationData,
   experienceData,
 }) {
-  console.log("clientexperience", educationData, experienceData);
   return (
     <div
       className="max-w-screen-xl mt-40 px-8 xl:px-16 mx-auto"

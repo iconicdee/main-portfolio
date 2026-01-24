@@ -5,7 +5,7 @@ import AdminEducationView from "@/components/admin/education";
 import AdminExperienceView from "@/components/admin/experience";
 import AdminContactView from "@/components/admin/contact";
 import AdminProjectView from "@/components/admin/project";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { addData, getData, updateData, login } from "@/services";
 import Login from "@/components/login";
 
@@ -125,14 +125,13 @@ export default function AdminView() {
     },
   ];
 
-  async function extractAllDatas() {
+  const extractAllDatas = useCallback(async () => {
     const data = await getData(currentSelectedTab);
-    console.log(data);
     if (data?.success) {
-      setAllData({
-        ...allData,
+      setAllData((prev) => ({
+        ...prev,
         [currentSelectedTab]: data && data.data,
-      });
+      }));
     }
 
     if (
@@ -154,7 +153,7 @@ export default function AdminView() {
       setAboutData(data && data.data[0]);
       setUpdate(true);
     }
-  }
+  }, [currentSelectedTab]);
 
   async function handleSaveData() {
     const dataMap = {
@@ -169,11 +168,9 @@ export default function AdminView() {
       [currentSelectedTab]: dataMap[currentSelectedTab],
     }));
     const payload = dataMap[currentSelectedTab];
-    console.log("payload", payload);
     const response = update
       ? await updateData(currentSelectedTab, payload)
       : await addData(currentSelectedTab, payload);
-    console.log("response", response);
 
     if (response.success) {
       extractAllDatas();
@@ -183,24 +180,21 @@ export default function AdminView() {
 
   useEffect(() => {
     extractAllDatas();
-  }, [currentSelectedTab]);
+  }, [extractAllDatas]);
 
   function resetFormDatas() {
-    setHomeData(initialHomeData),
+    (setHomeData(initialHomeData),
       setAboutData(initialAboutData),
       setEducationData(initialEducationData),
-      setExperienceData(initialExperienceData);
+      setExperienceData(initialExperienceData));
     setProjectData(initialProjectData);
   }
-
-  console.log(allData, homeData, aboutData);
 
   useEffect(() => {
     setAuthUser(JSON.parse(sessionStorage.getItem("authUser")));
   }, []);
 
   async function handleLogin() {
-    console.log("inside handle login");
     try {
       const response = await login(loginFormData);
 
@@ -247,7 +241,7 @@ export default function AdminView() {
         <button
           className="p-4 font-bold text-xl text-black"
           onClick={() => {
-            setAuthUser(false), sessionStorage.removeItem("authUser");
+            (setAuthUser(false), sessionStorage.removeItem("authUser"));
           }}
         >
           LogOut
@@ -257,7 +251,7 @@ export default function AdminView() {
         {menuItem.map((item) =>
           item.id === currentSelectedTab ? (
             <div key={item.id}>{item.Component}</div>
-          ) : null
+          ) : null,
         )}
       </div>
     </div>

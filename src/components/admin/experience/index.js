@@ -28,7 +28,6 @@ export default function AdminExperienceView({
   handleSaveData,
   data,
 }) {
-  console.log(formData);
   return (
     <div>
       <div className="mb-10">

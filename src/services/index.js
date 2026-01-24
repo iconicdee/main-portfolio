@@ -18,7 +18,6 @@ export async function addData(currentTab, formData) {
 
 export async function getData(currentTab) {
   try {
-    console.log("now in my get data service");
     const response = await fetch(`/api/${currentTab}/get`, {
       method: "GET",
     });
@@ -60,7 +59,6 @@ export async function updateData(currentTab, formData) {
 }
 
 export async function login(formData) {
-  console.log("inside login function");
   try {
     const res = await fetch(`/api/login`, {
       method: "POST",

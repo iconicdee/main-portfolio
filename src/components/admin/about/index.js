@@ -46,7 +46,7 @@ export default function AdminAboutView({
         {data && data.length
           ? data.map((item) => (
               <div
-                key={item.id}
+                key={item._id}
                 className="flex flex-col gap-4 border p-4 border-green-600"
               >
                 <p>{item.yearofexperience}</p>

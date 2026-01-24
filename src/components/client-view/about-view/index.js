@@ -36,7 +36,6 @@ const skillItemVariant = {
 };
 
 export default function ClientAboutView({ data }) {
-  console.log(data);
   const setVariants = useMemo(() => variants(), []);
   const aboutDataInfo = [
     {
@@ -66,8 +65,8 @@ export default function ClientAboutView({ data }) {
               index === 0
                 ? "sm:justify-start"
                 : index === 1
-                ? "sm:justify-center"
-                : "sm:justify-end"
+                  ? "sm:justify-center"
+                  : "sm:justify-end"
             } py-4 sm:py-6 w-8/12 px-4 sm:w-auto mx-auto sm:mx-0`}
             custom={{ duration: 2 + index }}
             variants={setVariants}
@@ -114,10 +113,11 @@ export default function ClientAboutView({ data }) {
             <Image
               src={aboutMeImage}
               alt="About Me"
-              layout="responsive"
               height={418}
               width={500}
               quality={100}
+              priority
+              style={{ width: "100%", height: "auto" }}
               className="rounded-lg"
             />
           </motion.div>
